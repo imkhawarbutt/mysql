@@ -1,0 +1,85 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+
+    <title>Sign UP</title>
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('q');
+        json = JSON.parse(atob(q))
+    </script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="mt-5 text-center">
+            <a class="navbar-brand" href="/account">
+                <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="50" height="50" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+        <div class="mt-5">
+           
+        <form class="col-8 m-auto hide" method="post" action="signup">
+            <h4><%=title%></h4>
+            <div  class="mb-4">Welcome to signup page.</div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="furstName">First Name</label>
+                        <input type="text" name="firstName" class="form-control" id="firstName" aria-describedby="firstNameHelp"
+                            placeholder="ex: Khawar" autofocus>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="lastName" class="form-control" id="lastName" aria-describedby="lastNameHelp"
+                            placeholder="ex: Butt" >
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
+                    placeholder="ex: khawar@live.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" name="password" required class="form-control" id="exampleInputPassword1" placeholder="**********">
+            </div>
+            <script>
+                
+                if (json)
+                {
+                    document.write('<div class="text-danger pb-3">'+json.message + '<b>'+json.email+'</b></div>')
+                }
+            </script>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+    </div>
+
+    <script>
+         window.onload = function()
+         {
+            document.getElementById("firstName").value = json.firstName;
+            document.getElementById("lastName").value = json.lastName;
+            document.getElementById("email").value = json.email;
+            document.getElementById("email").focus();
+         }
+
+    </script>
+</body>
+
+</html>

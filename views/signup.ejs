@@ -1,0 +1,142 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+
+    <title>Sign UP</title>
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link href="/stylesheets/style.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="/javascripts/javascript.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('q');
+        if (q) json = JSON.parse(atob(q))
+
+        function validDate() {
+
+            if (document.getElementById("password").value == document.getElementById("Repassword").value) {
+
+                return true;
+            }
+
+            else {
+                document.getElementById("error").innerHTML = "Password doesn't mached";
+                return false;
+            }
+        }
+        function resetError(container) {
+            document.getElementById(container).innerHTML = "";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="mt-5 text-center">
+            <a class="navbar-brand" href="/account">
+                <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="50" height="50"
+                    class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+        <div id="signin" class="mt-5">
+
+            <form class="col-6 m-auto border-round pt-3 pb-3 box-shadow" method="post" action="signin">
+                <h4>Signin</h4>
+                <div class="mb-4">Welcome to Signin page.</div>
+                <div class="form-group">
+                    <label for="emailSignin">Email</label>
+                    <input type="email" name="emailSignin" class="form-control" id="emailSignin"
+                        aria-describedby="emailHelp" placeholder="ex: khawar@live.com" autofocus required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordSignIn">Password</label>
+                    <input type="password" name="passwordSignIn" required class="form-control" id="passwordSignIn"
+                        placeholder="**********">
+                </div>
+                <div id="errorSignin" class="text-danger"></div>
+                <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+                <br><br>
+                <div>No account? <a href="javascript:toggle('signin', 'signup')">Create one!</a></div>
+            </form>
+        </div>
+        <div id="signup" class="mt-5 hide">
+            <form id="signup" class="col-6 m-auto border-round box-shadow pt-3 pb-3" method="post" action="signup"
+                onsubmit="return validDate()">
+                <h4>
+                    <%=title%>
+                </h4>
+                <div class="mb-4">Welcome to signup page.</div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="furstName">First Name</label>
+                            <input type="text" name="firstName" class="form-control" id="firstName"
+                                aria-describedby="firstNameHelp" placeholder="ex: Khawar" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" name="lastName" class="form-control" id="lastName"
+                                aria-describedby="lastNameHelp" placeholder="ex: Butt">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        required placeholder="ex: khawar@live.com">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" required class="form-control" id="password"
+                                placeholder="**********" onkeydown="resetError('error')">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="Repassword">Password</label>
+                            <input type="password" name="Repassword" required class="form-control" id="Repassword"
+                                placeholder="**********" onkeydown="resetError('error')">
+                        </div>
+                    </div>
+                </div>
+                <div id="error" class="text-danger"></div>
+                <button type="submit" class="btn btn-primary pull-right">Sign up</button>
+                <br><br>
+                <div>Already a member? <a href="javascript:toggle('signup', 'signin')">Signin</a></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+
+
+            if (typeof json !== 'undefined') {
+
+                if (json.action == "signup") {
+                    document.getElementById("firstName").value = json.firstName;
+                    document.getElementById("lastName").value = json.lastName;
+                    document.getElementById("email").value = json.email;
+                    document.getElementById("email").focus();
+                    document.getElementById("error").innerHTML = json.message;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

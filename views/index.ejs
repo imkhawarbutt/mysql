@@ -5,15 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <a href="/account">Client Area</a>
+    
     <h1><%= title %> v.1</h1>
     <form action="/" method="POST">
       <input type="text" name="name" autofocus>
       <input type="submit">
     </form>
     <br>
-
     <%
-    
     if (locals.data)
     {
       if (data.length == 0)
@@ -23,8 +23,8 @@
       }
       else
       {%>
-
-        <b>Total Results Found: <%=data.length %></b>
+        <h3>Searching for <b>'<%= keyword %>'</b></h3>
+        Total Results Found: <b><%=data.length %></b>
 <br>
         <%
 

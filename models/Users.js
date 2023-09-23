@@ -1,17 +1,27 @@
 var database = require("../database");
-
-class Users {
-
-    constructor(firstName) {
-        this.firstName = firstName;
-    }
+const date = require('date-and-time')
 
 
+const findOne = async (req) => {
+    const sql = "SELECT * FROM " + req.table + " WHERE " + req.key + " LIKE '%" + req.val + "%' ORDER BY fullName ASC";
+    return new Promise((resolve, reject) => {
+        database.query(sql, (err, result) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(result)
+        });
+    });
 }
 
-const getUsers = async (req) => {
+const create = async (req) => {
+    const now = new Date();
+    const createAt = date.format(now, "YYYY/MM/DD HH:mm:ss");
 
-    const sql = "SELECT * FROM users WHERE fullName LIKE '%"+req+"%' ORDER BY fullName ASC";
+    const { firstName, lastName, email, password } = req;
+    const fullName = firstName + ' ' + lastName;
+
+    const sql = "INSERT INTO users_nodejs(email, pass, firstName, lastName, fullName, user_type, create_at) VALUES('" + email + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + fullName + "', 'NodeJS', '" + createAt + "')";
     return new Promise((resolve, reject) => {
         database.query(sql, (err, result) => {
             if (err) {
@@ -21,12 +31,21 @@ const getUsers = async (req) => {
         });
     });
 
+}
 
+
+const deleteOne = (req) => {
+
+    return req + " has been deleted";
 }
 
 
 
-exports.getUsers = getUsers;
+
+
+exports.create = create;
+exports.deleteOne = deleteOne;
+exports.findOne = findOne;
 
 
 
